@@ -1,20 +1,20 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 
 const Navbar = () => {
-
+const navigate = useNavigate()
   const userData = JSON.parse(localStorage.getItem('userData'));
 
   const handleLogout =()=>{
     localStorage.clear();
-    window.location.href="/" 
+    navigate("/") 
 }
 const handleDashboardClick = () => {
   if (!userData) {
-    window.location.href="./Login" 
+    navigate("./Login") 
   } else {
-    window.location.href="./DashBoard" 
+    navigate("./DashBoard") 
   }
 };
   return (
@@ -25,7 +25,7 @@ const handleDashboardClick = () => {
         <i className="fas fa-bars" />
       </button>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <a className="navbar-brand mt-2 mt-lg-0 px-3" href="#">
+        <a className="navbar-brand mt-2 mt-lg-0 px-3" href="/">
           <img src="RIU-Logo.png" height={60} alt="MDB Logo" loading="lazy" />
         </a>
         <ul className="navbar-nav me-auto mb-2 mb-lg-0 fs-6 fw-bold">
@@ -33,11 +33,21 @@ const handleDashboardClick = () => {
             <Link className="nav-link" to="/">Home</Link>
           </li>
           <li style={{cursor:"pointer"}} className='' onClick={handleDashboardClick}>
-            <a className="nav-link" to="DashBoard" >Dashboard</a>
+            <Link className="nav-link" to="DashBoard" >Dashboard</Link>
           </li>
           <li className="nav-item" >
-            <Link className="nav-link" href="#">Projects</Link>
+            <Link className="nav-link" to="Summary">Summary</Link>
           </li>
+          <li className="nav-item">
+              <Link className="nav-link" to="/About">
+              About Us
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/Contact">
+                Contact Us
+              </Link>
+            </li>
         </ul>
         {/* Left links */}
       </div>

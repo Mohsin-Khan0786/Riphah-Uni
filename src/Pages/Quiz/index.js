@@ -2,32 +2,37 @@ import React, { useEffect, useState } from "react";
 // import { Link } from "react-router-dom";
 import Footer from "../../Components/Footer";
 import './Quiz.css';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { configapp } from "../../firebase";
 
 
 
 const Quiz = () => {
   const [questionsData, setQuestionsData] = useState([]);
-  const [answers, setAnswers] = useState(Array(0).fill(null));
+  const [answers, setAnswers] = useState([]);
   const [timeRemaining, setTimeRemaining] = useState(600); 
-
+const navigate = useNavigate()
   const { id, collectionName } = useParams();
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const snapshot = await configapp.firestore().collection(collectionName).doc(id).get();
-        if (snapshot.exists) {
-          const data = snapshot.data();
-          if (data && data.questions) {
-            setQuestionsData(data.questions);
-            setAnswers(Array(data.questions.length).fill(null));
-          }
-        }
-      } catch (error) {
+        const docRef = configapp.firestore().collection(collectionName).doc(id);
+    
+        // Using onSnapshot to listen for changes
+        docRef.onSnapshot((doc) => {
+            if (doc.exists) {
+                const data = doc.data();
+                if (data && data.questions) {
+                    setQuestionsData(data.questions);
+                    setAnswers(Array(data.questions.length).fill(null));
+                }
+            }
+        });
+    } catch (error) {
         console.error("Error fetching questions: ", error);
-      }
+    }
+    
     };
 
     fetchQuestions();
@@ -52,69 +57,77 @@ const Quiz = () => {
     return `${minutes < 10 ? '0' : ''}${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
   };  
 
-const updateUserDocument = async () => {
-  try {
-    const currentUser = configapp.auth().currentUser;
-    if (currentUser) {
-      const userDocRef = configapp.firestore().collection('users').doc(currentUser.uid);
-      const userDoc = await userDocRef.get();
+
+  const updateUserDocument = async () => {
+      try {
+          const currentUser = configapp.auth().currentUser;
+          if (currentUser) {
+              const userDocRef = configapp.firestore().collection('users').doc(currentUser.uid);
+              
+              // Using onSnapshot to listen for changes
+              userDocRef.onSnapshot(async (doc) => {
+                  if (doc.exists) {
+                      const userData = doc.data();
+                      const newIndex = userData.index + 1;
+                      const topicStatus = `topic${newIndex}`;
       
-      if (userDoc.exists) {
-        const userData = userDoc.data();
-        const newIndex = userData.index + 1;
-        const topicStatus = `topic${newIndex}`;
-        
-        await userDocRef.update({
-          [topicStatus]: "completed",
-          index: newIndex
-        });
-        
-        window.location.href ="/Topics"
-      } else {
-        alert("User document not found.");
-      }
-    } else {
-      alert("No user logged in.");
-    }
-  } catch (error) {
-    console.error("Error updating user document: ", error);
-  }
-};
-
-const checkPassing = async () => {
-  try {
-    const snapshot = await configapp.firestore().collection(collectionName).doc(id).get();
-    if (snapshot.exists) {
-      const data = snapshot.data();
-      if (data && data.questions) {
-        const fetchedQuestions = data.questions;
-        let correctAnswers = 0;
-
-        fetchedQuestions.forEach((question, index) => {
-          // Compare user's selected answer with the correct answer from Firebase
-          if (answers[index] === question.answer) {
-            correctAnswers++;
+                      await userDocRef.update({
+                          [topicStatus]: "completed",
+                          index: newIndex
+                      });
+      
+                      navigate("/Topics");
+                  } else {
+                      alert("User document not found.");
+                  }
+              });
+          } else {
+              alert("No user logged in.");
           }
-        });
-
-        console.log("Correct Answers:", correctAnswers);
-        console.log("Total Questions:", fetchedQuestions.length);
-
-        const passingThreshold = 4; // Define your passing threshold here
-
-        if (correctAnswers >= passingThreshold) {
-          alert("Congratulations! You have passed the quiz.");
-          updateUserDocument();
-        } else {
-          alert("Sorry, you did not pass the quiz. Try again.");
-          console.log("User Answers:", answers);
-        }
+      } catch (error) {
+          console.error("Error updating user document: ", error);
       }
+  };
+  
+  const checkPassing = async () => {
+    try {
+        const docRef = configapp.firestore().collection(collectionName).doc(id);
+
+        // Using onSnapshot to listen for changes
+        docRef.onSnapshot((doc) => {
+            if (doc.exists) {
+                const data = doc.data();
+                if (data && data.questions) {
+                    const fetchedQuestions = data.questions;
+                    let correctAnswers = 0;
+
+                    fetchedQuestions.forEach((question, index) => {
+                        // Compare user's selected answer with the correct answer from Firebase
+                        if (answers[index] === question.answer) {
+                            correctAnswers++;
+                        }
+                    });
+
+                    console.log("Correct Answers:", correctAnswers);
+                    console.log("Total Questions:", fetchedQuestions.length);
+
+                    const passingThreshold = 4; // Define your passing threshold here
+
+                    if (correctAnswers >= passingThreshold) {
+                        alert("Congratulations! You have passed the quiz.");
+                        updateUserDocument();
+                    } else {
+                        alert("Sorry, you did not pass the quiz. Try again.");
+                        console.log("User Answers:", answers);
+                    }
+                }
+            }
+        });
+    } catch (error) {
+        console.error("Error fetching questions from Firebase: ", error);
     }
-  } catch (error) {
-    console.error("Error fetching questions from Firebase: ", error);
-  }
 };
+
 
 
 
@@ -137,7 +150,7 @@ const checkPassing = async () => {
             <div key={questionIndex} className="col-7 mt-5 mb-5">
               <p className="fw-bold">{question.question}</p>
               <div>
-                {question.options.map((option, optionIndex) => (
+                {question.options.map((option, optionIndex) => {
                   <label
                     key={optionIndex}
                     htmlFor={`${questionIndex}-${optionIndex}`}
@@ -157,7 +170,7 @@ const checkPassing = async () => {
                       <span className="subject">{option}</span>
                     </div>
                   </label>
-                ))}
+                    })}
               </div>
             </div>
           ))}

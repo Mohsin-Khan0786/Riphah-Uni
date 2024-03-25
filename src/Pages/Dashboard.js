@@ -6,9 +6,9 @@ import { configapp } from "../firebase";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+    const userData = JSON.parse(localStorage.getItem("userData"));
 
   useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem("userData"));
     console.log(userData, "qwertyui")
     if (
       userData &&
@@ -45,26 +45,28 @@ const Dashboard = () => {
       const db = configapp.firestore();
       const userRef = db.collection("users").where("email", "==", userData.email);
   
-      userRef.get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          doc.ref.update({ showCourse: false, [courseName]: true }).then(() => {
-
-            const updatedUserData = { ...userData, showCourse: false, [courseName]: true };
-            localStorage.setItem("userData", JSON.stringify(updatedUserData));
+      // Using onSnapshot to listen for changes
+      userRef.onSnapshot((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+              doc.ref.update({ showCourse: false, [courseName]: true }).then(() => {
+  
+                  const updatedUserData = { ...userData, showCourse: false, [courseName]: true };
+                  localStorage.setItem("userData", JSON.stringify(updatedUserData));
+              });
           });
-        });
       });
   
       Swal.fire(
-        "Enrolled!",
-        "You have successfully enrolled in the course.",
-        "success"
+          "Enrolled!",
+          "You have successfully enrolled in the course.",
+          "success"
       );
   
       navigate("/");
-    } else {
+  } else {
       Swal.fire("Canceled", "Your enrollment was canceled.", "error");
-    }
+  }
+  
   };
   
   return (
@@ -73,7 +75,7 @@ const Dashboard = () => {
         <div className="row">
           <div className="col-md-6 mb-4 shadow rounded">
             <div className="d-flex flex-row rounded" style={{ width: "600px" }}>
-              <img src="web-devlopment-logo.jpg" alt="" style={{ height: "250px", width: "300px" }} className="img-fluid rounded" />
+              <img src="wordpress.jpeg" alt="" style={{ height: "250px", width: "300px" }} className="img-fluid rounded" />
               <div className="card-body text-start mx-3">
                 <h4 className="card-title mt-3">Wordpress</h4>
                 <p className="card-text mb-4">
@@ -90,7 +92,7 @@ const Dashboard = () => {
           </div>
           <div className="col-md-6 mb-4 shadow rounded">
             <div className="d-flex flex-row rounded" style={{ width: "600px" }}>
-              <img src="web-devlopment-logo.jpg" alt="" style={{ height: "250px", width: "300px" }} className="img-fluid rounded" />
+              <img src="social-media-marketing.jpg" alt="" style={{ height: "250px", width: "300px" }} className="img-fluid rounded" />
               <div className="card-body text-start mx-3">
                 <h4 className="card-title mt-3">Social Media Marketing</h4>
                 <p className="card-text mb-4">
@@ -124,7 +126,7 @@ const Dashboard = () => {
           </div>
           <div className="col-md-6 mb-4 shadow rounded">
             <div className="d-flex flex-row rounded" style={{ width: "600px" }}>
-              <img src="web-devlopment-logo.jpg" alt="" style={{ height: "250px", width: "300px" }} className="img-fluid rounded" />
+              <img src="app-development.png" alt="" style={{ height: "250px", width: "300px" }} className="img-fluid rounded" />
               <div className="card-body text-start mx-3">
                 <h4 className="card-title mt-3">Flutter Develpoment</h4>
                 <p className="card-text mb-4">
