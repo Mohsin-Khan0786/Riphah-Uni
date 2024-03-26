@@ -26,7 +26,7 @@ const handleDashboardClick = () => {
       </button>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <a className="navbar-brand mt-2 mt-lg-0 px-3" href="/">
-          <img src="RIU-Logo.png" height={60} alt="MDB Logo" loading="lazy" />
+          <img src="RICLOGO.png" height={125} alt="Riphah Logo" loading="lazy" />
         </a>
         <ul className="navbar-nav me-auto mb-2 mb-lg-0 fs-6 fw-bold">
           <li className="nav-item">
