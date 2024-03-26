@@ -19,6 +19,8 @@ const Topics = () => {
   const [showTopic, setShowTopic] = useState(false);
   const [topicData, setTopicData] = useState(null);
   const [topicDataAll, setTopicDataAll] = useState(null);
+  const [alllTopics, setAlllTopics] = useState(0); // Changed from "0" to 0
+
   const [selectedTopicIndex, setSelectedTopicIndex] = useState(null);
   const [userIndex, setUserIndex] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -101,10 +103,14 @@ const Topics = () => {
         if (collectionName) {
           const collectionRef = db
             .collection(collectionName)
-            .orderBy("timestamp")
-            .limit(userIndex + 1);
+            .orderBy("timestamp");
 
           collectionRef.onSnapshot((snapshot) => {
+            const fetchedTopics = snapshot.docs.map((doc) => doc.data().topic);
+            setAlllTopics(fetchedTopics.length);
+          });
+
+          collectionRef.limit(userIndex + 1).onSnapshot((snapshot) => {
             const fetchedTopics = snapshot.docs.map((doc) => doc.data().topic);
             setTopics(fetchedTopics);
             setTopicDataAll(snapshot.docs.map((doc) => doc.data()));
@@ -122,28 +128,7 @@ const Topics = () => {
     }
 
     return () => {
-      const db = configapp.firestore();
-      let collectionName = "";
-
-      if (userData) {
-        if (userData.wordpress) {
-          collectionName = "Wordpress";
-        } else if (userData.smm) {
-          collectionName = "SMM";
-        } else if (userData.app) {
-          collectionName = "AppDev";
-        } else if (userData.web) {
-          collectionName = "WebDev";
-        }
-      }
-
-      if (collectionName) {
-        const collectionRef = db
-          .collection(collectionName)
-          .orderBy("timestamp")
-          .limit(userIndex + 1);
-        collectionRef.onSnapshot(() => {});
-      }
+      // Cleanup logic
     };
   }, [userData, userIndex]);
 
@@ -177,11 +162,11 @@ const Topics = () => {
   return (
     <div>
       {/* Progress bar */}
-      {userIndex !== null && topics.length > 0 && (
+      {userIndex !== null && alllTopics > 0 && (
         <div>
           <LinearProgress
             variant="determinate"
-            value={(userIndex / topics.length) * 100}
+            value={(userIndex / alllTopics) * 100}
             sx={{ height: 4 }}
           />
           <Typography
@@ -189,13 +174,17 @@ const Topics = () => {
             color="text.secondary"
             sx={{ textAlign: "center", mt: 1 }}
           >
-            {((userIndex / topics.length) * 100).toFixed(2)}%
+            {((userIndex / alllTopics) * 100).toFixed(2)}%
           </Typography>
         </div>
       )}
       <div
         className="container"
-        style={{ display: "flex", justifyContent: "center" }}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          position: "relative",
+        }}
       >
         {showList && (
           <List sx={{ width: "100%", maxWidth: 700 }}>
@@ -234,11 +223,20 @@ const Topics = () => {
                         Show
                       </Button>
                     )}
-                    <Typography>
-                      {correctAnswers[index]
+                    <Button
+                      style={{
+                        marginLeft: "25px",
+                        padding: "5px 5px",
+                      }}
+                      
+                    >
+                      {/* {correctAnswers[index]
                         ? `${correctAnswers[index]}`
-                        : "Not-Submitted"}
-                    </Typography>
+                        : "Not-Submitted"} */}
+
+{`Result: ${correctAnswers[index] ? correctAnswers[index] : "Not-Submitted"} out of 12`}
+
+                    </Button>
                   </ListItem>
                 )
               )}

@@ -52,7 +52,7 @@ const Footer = () => {
                     style={{ height: "50px", paddingRight: "13px" }}
                   ></img>
                   {/* <i className="fas fa-gem me-3" />*/}
-                  Innovation.TECH
+                  INVOSEG AI
                 </h6>
                 <p>
                   INNOVATION.TECH collaborates with INVOSEG for enhanced
@@ -117,9 +117,13 @@ const Footer = () => {
           className="text-center p-4"
           style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}
         >
-          © 2021 Copyright:
-          <a className="text-reset fw-bold" href="https://mdbootstrap.com/">
-            MDBootstrap.com
+          © 2024 Copyright:
+          <a
+            className="text-reset fw-bold"
+            href="https://invoseg.com/"
+            target="_blank"
+          >
+            Design and Developed by INNOVATION.TECH & INVOSEG AI
           </a>
         </div>
         {/* Copyright */}
