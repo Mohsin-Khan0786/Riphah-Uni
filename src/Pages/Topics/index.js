@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./Topics.css";
 import { configapp } from "../../firebase";
 import Enrollment from "../../Components/Enrollment";
 import { useNavigate } from "react-router-dom";
@@ -10,10 +9,12 @@ import {
   ListItemAvatar,
   Avatar,
   Button,
+  LinearProgress,
+  Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const Index = () => {
+const Topics = () => {
   const [topics, setTopics] = useState([]);
   const [showTopic, setShowTopic] = useState(false);
   const [topicData, setTopicData] = useState(null);
@@ -22,19 +23,20 @@ const Index = () => {
   const [userIndex, setUserIndex] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showList, setShowList] = useState(true);
+  const [correctAnswers, setCorrectAnswers] = useState([]);
+
   const navigate = useNavigate();
 
   const handleShowData = (index) => {
     setSelectedTopicIndex(index);
     setShowTopic(true);
-    setShowList(false); // Hide the list when showing topic data
-    // Set the topic data corresponding to the clicked topic
+    setShowList(false);
     setTopicData(topicDataAll[index]);
   };
 
   const handleHideData = () => {
     setShowTopic(false);
-    setShowList(true); // Show the list when hiding topic data
+    setShowList(true);
   };
 
   const userData = JSON.parse(localStorage.getItem("userData"));
@@ -46,11 +48,17 @@ const Index = () => {
           const db = configapp.firestore();
           const userRef = db.collection("users").doc(userData.uid);
 
-          // Using onSnapshot to listen for changes
           userRef.onSnapshot((doc) => {
             if (doc.exists) {
               const userData = doc.data();
-              setUserIndex(userData.index); // Set user's index
+              setUserIndex(userData.index);
+              const answersArray = [];
+              for (let i = 0; i < topics.length; i++) {
+                answersArray.push(
+                  userData[`topic${i + 1}_correct_answers`] || "Not-Submitted"
+                );
+              }
+              setCorrectAnswers(answersArray);
             } else {
               console.error("User document not found");
             }
@@ -63,15 +71,14 @@ const Index = () => {
 
     fetchUserIndex();
 
-    // Clean up the listener when component unmounts
     return () => {
       if (userData) {
         const db = configapp.firestore();
         const userRef = db.collection("users").doc(userData.uid);
-        userRef.onSnapshot(() => {}); // Unsubscribe from snapshot listener
+        userRef.onSnapshot(() => {});
       }
     };
-  }, [userData]);
+  }, [userData, topics]);
 
   useEffect(() => {
     const fetchTopics = async () => {
@@ -97,7 +104,6 @@ const Index = () => {
             .orderBy("timestamp")
             .limit(userIndex + 1);
 
-          // Using onSnapshot to listen for changes
           collectionRef.onSnapshot((snapshot) => {
             const fetchedTopics = snapshot.docs.map((doc) => doc.data().topic);
             setTopics(fetchedTopics);
@@ -115,7 +121,6 @@ const Index = () => {
       fetchTopics();
     }
 
-    // Clean up the listener when component unmounts or when userIndex changes
     return () => {
       const db = configapp.firestore();
       let collectionName = "";
@@ -137,7 +142,7 @@ const Index = () => {
           .collection(collectionName)
           .orderBy("timestamp")
           .limit(userIndex + 1);
-        collectionRef.onSnapshot(() => {}); // Unsubscribe from snapshot listener
+        collectionRef.onSnapshot(() => {});
       }
     };
   }, [userData, userIndex]);
@@ -170,58 +175,80 @@ const Index = () => {
   };
 
   return (
-    <div
-      className="container"
-      style={{ display: "flex", justifyContent: "center" }}
-    >
-      {showList && (
-        <List sx={{ width: "100%", maxWidth: 700 }}>
-          {topicDataAll &&
-            topicDataAll.map(
-              (
-                topic,
-                index // Check if topicDataAll is not null or undefined
-              ) => (
-                <ListItem
-                  key={index}
-                  alignItems="flex-start"
-                  sx={{ marginBottom: "20px" }}
-                >
-                  <ListItemAvatar>
-                    <Avatar
-                      alt={topic.title}
-                      src={topic.avatar}
-                      sx={{ width: 55, height: 55, marginRight: 4 }}
-                    />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={
-                      <span style={{ fontWeight: "bold", fontSize: "16px" }}>
-                        {topic?.topic}
-                      </span>
-                    }
-                    secondary={truncateDescription(topic?.description)}
-                    sx={{ fontSize: "14px", marginRight: "50px" }}
-                  />
-                  {!showTopic && (
-                    <Button
-                      variant="contained"
-                      onClick={() => handleShowData(index)}
-                    >
-                      Show
-                    </Button>
-                  )}
-                </ListItem>
-              )
-            )}
-        </List>
+    <div>
+      {/* Progress bar */}
+      {userIndex !== null && topics.length > 0 && (
+        <div>
+          <LinearProgress
+            variant="determinate"
+            value={(userIndex / topics.length) * 100}
+            sx={{ height: 4 }}
+          />
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ textAlign: "center", mt: 1 }}
+          >
+            {((userIndex / topics.length) * 100).toFixed(2)}%
+          </Typography>
+        </div>
       )}
+      <div
+        className="container"
+        style={{ display: "flex", justifyContent: "center" }}
+      >
+        {showList && (
+          <List sx={{ width: "100%", maxWidth: 700 }}>
+            {topicDataAll &&
+              topicDataAll.map(
+                (
+                  topic,
+                  index // Check if topicDataAll is not null or undefined
+                ) => (
+                  <ListItem
+                    key={index}
+                    alignItems="flex-start"
+                    sx={{ marginBottom: "20px" }}
+                  >
+                    <ListItemAvatar>
+                      <Avatar
+                        alt={topic.title}
+                        src={topic.avatar}
+                        sx={{ width: 55, height: 55, marginRight: 4 }}
+                      />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={
+                        <span style={{ fontWeight: "bold", fontSize: "16px" }}>
+                          {topic?.topic}
+                        </span>
+                      }
+                      secondary={truncateDescription(topic?.description)}
+                      sx={{ fontSize: "14px", marginRight: "50px" }}
+                    />
+                    {!showTopic && (
+                      <Button
+                        variant="contained"
+                        onClick={() => handleShowData(index)}
+                      >
+                        Show
+                      </Button>
+                    )}
+                    <Typography>
+                      {correctAnswers[index]
+                        ? `${correctAnswers[index]}`
+                        : "Not-Submitted"}
+                    </Typography>
+                  </ListItem>
+                )
+              )}
+          </List>
+        )}
 
-      {showTopic && <Enrollment topicD={topicData} handleOff={handleOff} />}
+        {showTopic && <Enrollment topicD={topicData} handleOff={handleOff} />}
+      </div>
     </div>
   );
 };
 
-
-
-export default Index;
+export default Topics;

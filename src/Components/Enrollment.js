@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Footer from "./Footer";
 import ReactPlayer from 'react-player';
 
 import Swal from "sweetalert2";
-import Quiz from "./Quiz";
 
 const Enrollment = ({topicD, handleOff}) => {
 
@@ -32,9 +30,7 @@ setShowQuiz(true);
 
   return (
     <>
-      {showQuiz ? (
-        <Quiz />
-      ) : (
+    
         <div className="container bg-light">
           <div className="row">
             <div className="col">
@@ -116,8 +112,7 @@ setShowQuiz(true);
             </div>
           </div>
         </div>
-      )}
-      <Footer />
+     
     </>
   );
 };

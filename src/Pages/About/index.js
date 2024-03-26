@@ -1,85 +1,96 @@
-import React from 'react'
-import './AboutUs.css'
+import React from "react";
+import "./AboutUs.css";
 
 const index = () => {
   return (
     <div>
       <section className="about-section">
-  <div className="container">
-    <div className="row">                
-      <div className="content-column col-lg-6 col-md-12 col-sm-12 order-2">
-        <div className="inner-column">
-          <div className="sec-title pt-sm-5">
-            <h2>We are Creative Tech Enthusiast working since 2015</h2>
+        <div className="container">
+          <div className="row">
+            <div className="content-column col-lg-6 col-md-12 col-sm-12 order-2">
+              <div className="inner-column">
+                <div className="sec-title pt-sm-8">
+                  <h2>We are Creative Tech Enthusiast working since 2015</h2>
+                </div>
+                <div className="text">
+                  With over 5 years of experience, I am Daniyal Humayun,
+                  currently working at INNOVATION.TECH and INVOSEG AI. Our
+                  mission is to offer cutting-edge solutions for your website or
+                  web application, enhancing both its attractiveness and
+                  efficiency by creating bespoke plugins tailored to your needs.
+                </div>{" "}
+                <div className="text">
+                  At INNOVATION.TECH, we're dedicated to providing next-level
+                  tutorials to align with your expertise and current industry
+                  trends. As a learning platform, Css3 Transition offers a
+                  plethora of high-quality content on web development and plugin
+                  tutorials, utilizing HTML, HTML5, CSS, CSS3, jQuery, and
+                  JavaScript. We also specialize in e-learning classes covering
+                  various topics such as app development, web development,
+                  WordPress, social media marketing, and custom website
+                  creation. Additionally, we excel in advanced AI applications,
+                  leveraging state-of-the-art technologies to deliver innovative
+                  solutions for our clients. Our proficiency extends to React
+                  JavaScript languages, ensuring top-notch services to our
+                  clients.
+                </div>
+                <div className="btn-box">
+                  <a href="/Contact" className="theme-btn btn-style-one">
+                    Contact Us
+                  </a>
+                </div>
+              </div>
+            </div>
+            {/* Image Column */}
+            <div className="image-column col-lg-6 col-md-12 col-sm-12">
+              <div className="inner-column wow fadeInLeft">
+                <div className="author-desc">
+                  <h2>Daniyal Humayun</h2>
+                  <span>CEO at INNOVATION.TECH & INVOSEG AI</span>
+                </div>
+                <figure className="image-1">
+                  <a href="#" className="lightbox-image" data-fancybox="images">
+                    <img title="Rahul Kumar Yadav" src="invoseg-logo.png" alt />
+                  </a>
+                </figure>
+              </div>
+            </div>
           </div>
-          <div className="text">I am Rahul Yaduvanshi works at Css3 Transition since last 3 years. We are here to provide touch notch solution for your website or web application that helps you to make your website look attractive &amp; efficient in handling by creating usefull plugins thats you need.</div>
+          <div className="sec-title">
+            <span className="title">Our Future Goal</span>
+            <h2>Leading Innovation & Technology</h2>
+          </div>
           <div className="text">
-            We are here to serve you next level tutorial that currently in trend to match you with your expertise. Css3 transition is a learning website. where you can find many good quality content related to web development and tutorials about plugins. here we are using html, html5, css, css3, jquery &amp; javascript along with inspirational UI design layout by professionals by using Photoshop and adobe allustrator.
+            At INNOVATION.TECH, we are committed to revolutionizing the digital
+            landscape. As the CEO, Daniyal Humayun spearheads our efforts to
+            lead in innovation and technology. Our focus extends beyond mere
+            UI/UX and functionality. We meticulously craft plugins with
+            impeccable structure and stunning aesthetics, tailored to elevate
+            your web applications and websites.
           </div>
-          <div className="btn-box">
-            <a href="/Contact" className="theme-btn btn-style-one">Contact Us</a>
+
+          <div className="text">
+            Leveraging a finely curated toolkit, we ensure that every solution
+            we deliver is not only functional but also visually captivating. We
+            believe in performance and aesthetics working hand in hand. Our
+            mission is to provide comprehensive technical content across various
+            domains, be it design or functionality. We strive to offer
+            high-quality content free of charge, ensuring accessibility for all.
+            Additionally, we encourage our users to share their own content. If
+            our technical team finds it noteworthy, we will feature it on our
+            blog, further enriching our community.
+          </div>
+
+          <div className="text"></div>
+          <div className="text">
+            In closing, we invite you to explore our website and indulge in the
+            wealth of quality content we offer. Thank you for being a part of
+            our journey towards innovation and excellence.
           </div>
         </div>
-      </div>
-      {/* Image Column */}
-      <div className="image-column col-lg-6 col-md-12 col-sm-12">
-        <div className="inner-column wow fadeInLeft">
-          <div className="author-desc">
-            <h2>Daniyal Humayun</h2>
-            <span>Web Developer</span>
-          </div>
-          <figure className="image-1"><a href="#" className="lightbox-image" data-fancybox="images"><img title="Rahul Kumar Yadav" src="invoseg-logo.png" alt /></a></figure>
-        </div>
-      </div>
+      </section>
     </div>
-    <div className="sec-title">
-      <span className="title">Our Future Goal</span>
-      <h2>We want to lead in innovation &amp; Technology</h2>
-    </div>
-    <div className="text">
-      We works on UI/UX and functionality as well so that a plugins comes with proper stucture &amp; stunning looks which suits to your web app &amp; website.
-    </div>
-    <div className="text">
-      We take a small toolkit here and ride it well so that it is fit for your use. One who performs well and looks even better.
-    </div>
-    <div className="text">                
-      Here we are trying to give you all kinds of technical content, whether it is related to designing or functionality. We are creating content on a lot of languages and will continue to make it free of cost even if you use it without any problem. Which is a very important thing.
-    </div>
-    <div className="text">
-      Here you can also share the content you create, if our technical team likes it, then we will also share it on our blog.
-    </div>
-    <div className="text">
-      In the end, I would say keep visiting our website and enjoy the quality content.
-    </div>
-  </div>
-</section>
+  );
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </div>
-  )
-}
-
-export default index
+export default index;
