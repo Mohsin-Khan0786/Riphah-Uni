@@ -33,8 +33,8 @@ const handleDashboardClick = () => {
             <span className="navbar-toggler-icon" />
           </button>
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-      <a className="navbar-brand mt-2 mt-lg-0 px-3" href="/">
-        <img src="RICLOGO.png" height={125} alt="Riphah Logo" loading="lazy" />
+      <a className="navbar-brand  mt-lg-0 px-3" href="/">
+        <img src="LOGO.png" height={165} width={185} alt="Riphah Logo" loading="lazy" />
       </a>
       {/* Sidebar for mobile view */}
       <div className="sidebar">

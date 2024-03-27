@@ -94,7 +94,7 @@
 
 .video-container-home-page {
   position: relative;
-  width: 70%;
+  width: 70%ing;
   height: 500px!important;
   padding-top: 10px; /* Aspect ratio 16:9 */
   margin: 0 auto; /* Center the container horizontally */
@@ -118,7 +118,7 @@
 /* ---------------------------------- */
 
 
-body{margin-top:20px;}
+body{margin-top:0px;}
 .section_padding_130 {
     padding-top: 130px;
     padding-bottom: 130px;
