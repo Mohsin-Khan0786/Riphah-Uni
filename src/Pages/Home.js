@@ -1,17 +1,18 @@
 import React from "react";
 import img1 from "../Assets/homeimg1.png";
 import { Link } from "react-router-dom";
+import ReactPlayer from "react-player";
 // import ReactPlayer from 'react-player'
 
 const Home = () => {
   const faqData = [
     {
-      question: "What does Inovation.TECH offer?",
+      question: "What does INNOVATION.TECH offer?",
       answer:
-        "Inovation.TECH offers a special package called INVOSEG Plus. It includes four courses about making websites, WordPress, making apps, and social media marketing. It helps you learn new things and get better.",
+        "INNOVATION.TECH offers a special package called INVOSEG Plus. It includes four courses about making websites, WordPress, making apps, and social media marketing. It helps you learn new things and get better.",
     },
     {
-      question: "Can I save money with Inovation.TECH?",
+      question: "Can I save money with INNOVATION.TECH?",
       answer:
         "Yes, if you take more than one course regularly, you can save up to 30% each month. The more courses you take, the more money you save.",
     },
@@ -210,6 +211,20 @@ const Home = () => {
         </div>
        
       </div>
+
+      
+    <div className="video-container-home-page">
+      <div className="player-wrapper">
+        <ReactPlayer
+          className="react-player"
+          url='https://youtu.be/4lLhMY2CGO8?si=7vOoZgJdRwUVEjV0'
+          width='100%'
+          height='500px'
+          controls={true}
+        />
+      </div>
+    </div>
+
 
       {/* --------------------------Coursera Plus--------------------------- */}
 
