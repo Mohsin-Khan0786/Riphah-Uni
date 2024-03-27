@@ -212,9 +212,9 @@ const Home = () => {
        
       </div>
 
-      
+      <div className="pb-5">
     <div className="video-container-home-page">
-      <div className="player-wrapper">
+      {/* <div className="player-wrapper"> */}
         <ReactPlayer
           className="react-player"
           url='https://youtu.be/4lLhMY2CGO8?si=7vOoZgJdRwUVEjV0'
@@ -223,7 +223,8 @@ const Home = () => {
           controls={true}
         />
       </div>
-    </div>
+    {/* </div> */}
+    </div> 
 
 
       {/* --------------------------Coursera Plus--------------------------- */}
