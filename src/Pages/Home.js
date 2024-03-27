@@ -61,15 +61,16 @@ const Home = () => {
               courses for career advancement.
             </p>
             {/* <p className="text-center text-lg-start">$59/month, cancel anytime</p> */}
-            <div className="d-grid gap-2 d-md-flex justify-content-center justify-content-md-start">
-              <Link
-                to={"/DashBoard"}
-                type="button"
-                className="btn btn-primary btn-lg px-4 me-md-2 mb-4"
-              >
-                Start My Internship program
-              </Link>
-            </div>
+                    <div className="d-grid gap-2 d-md-flex justify-content-center justify-content-md-start">
+          <Link
+            to={"/DashBoard"}
+            type="button"
+            className="btn btn-primary btn-sm px-3 px-md-4 me-md-2 mb-3 mb-md-0"
+          >
+            Start My Internship program
+          </Link>
+        </div>
+
             {/* <p className="text-center text-lg-start text-primary">or $399/year with 14-day money-back guarantee</p> */}
           </div>
           <div className="col-lg-6 px-3 px-lg-5">
@@ -94,59 +95,60 @@ const Home = () => {
           <h4 className="col-12 text-2xl text-center mb-4">
             Learn from INNVOATION.TECH and INVOSEG AI Software Engineers
           </h4>
-          <div className="container">
-            <div className="row justify-content-center home-logos-part ">
-              <div className="col-6 col-sm-4 col-md-3 col-lg-2">
-                <img
-                  src="hb-logo.jpg"
-                  alt="Brand 1"
-                  className="img-fluid"
-                  style={{ height: "180px",width:"100%" }}
-                />
-              </div>
-              <div className="col-6 col-sm-4 col-md-3 col-lg-2">
-                <img
-                  src="Al-nafoorah.jpeg"
-                  alt="Brand 2"
-                  className="img-fluid"
-                  style={{ height: "180px" }}
-                />
-              </div>
-              <div className="col-6 col-sm-4 col-md-3 col-lg-2">
-                <img
-                  src="Toni-GUY.png"
-                  alt="Brand 3"
-                  className="img-fluid"
-                  style={{ height: "180px" }}
-                />
-              </div>
-              <div className="col-6 col-sm-4 col-md-3 col-lg-2">
-                <img
-                  src="indigo.jpg"
-                  alt="Brand 4"
-                  className="img-fluid"
-                  style={{ height: "180px" }}
-                />
-              </div>
-              <div className="col-6 col-sm-4 col-md-3 col-lg-2">
-                <img
-                  src="the-sky.jpg"
-                  alt="Brand 5"
-                  className="img-fluid"
-                  style={{ height: "180px" }}
-                />
-              </div>
-              <div className="col-6 col-sm-4 col-md-3 col-lg-2">
-                <img
-                  src="lamasa.jpeg"
-                  alt="Brand 6"
-                  className="img-fluid"
-                  style={{ height: "180px", width: "160px" }}
-                />
-              </div>
-            </div>
+      
+          <div className="row justify-content-center home-logos-part">
+  <div className="col-12 col-md-6 col-lg-2 mb-3">
+    <img
+      src="hb-logo.jpg"
+      alt="Brand 1"
+      className="img-fluid"
+      style={{ height: "180px", width: "180px" }}
+    />
+  </div>
+  <div className="col-12 col-md-6 col-lg-2  mb-3 ">
+    <img
+      src="Al-nafoorah.jpeg"
+      alt="Brand 2"
+      className="img-fluid"
+      style={{ height: "180px" ,width: "180px" }}
+    />
+  </div>
+  <div className="col-12 col-md-6 col-lg-2  mb-3">
+    <img
+      src="Toni-GUY.png"
+      alt="Brand 3"
+      className="img-fluid"
+      style={{ height: "180px" ,width: "180px" }}
+    />
+  </div>
+  <div className="col-12 col-md-6 col-lg-2  mb-3">
+    <img
+      src="indigo.jpg"
+      alt="Brand 4"
+      className="img-fluid"
+      style={{ height: "180px" ,width: "180px" }}
+    />
+  </div>
+  <div className="col-12 col-md-6 col-lg-2  mb-3">
+    <img
+      src="the-sky.jpg"
+      alt="Brand 5"
+      className="img-fluid"
+      style={{ height: "180px" ,width: "180px" }}
+    />
+  </div>
+  <div className="col-12 col-md-6 col-lg-2  mb-3">
+    <img
+      src="lamasa.jpeg"
+      alt="Brand 6"
+      className="img-fluid"
+      style={{ height: "180px", width: "180px" }}
+    />
+  </div>
+</div>
+
           </div>
-        </div>
+        
         <div className="row h-32rem">
           <div className="col-12 h-12rem mt-8">
             <div className="text-4xl font-semibold text-center p-4">
@@ -206,7 +208,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="row h-42rem bg-green-400" />
+       
       </div>
 
       {/* --------------------------Coursera Plus--------------------------- */}

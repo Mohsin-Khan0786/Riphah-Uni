@@ -55,10 +55,10 @@
   padding-left: 70px !important;
   padding-right: 70px !important;
 }
-.home-logos-part{
+/* .home-logos-part{
   padding-left: 100px !important;
   padding-right: 100px !important;
-}
+} */
 
 
 
@@ -451,11 +451,13 @@ input[type=text]:placeholder {
   display: none; /* Hide the comments */
 }
 
-.video-container{
-  height: 800px !important;
-  width: 1200px !important;
-  margin-left: 300px !important;
+.video-container {
+  margin: auto; /* Center the container horizontally */
+  max-width: 800px; /* Optionally limit the maximum width */
+  height: 500px; /* Set the desired height */
 }
+
+
 
 
 
@@ -483,6 +485,8 @@ input[type=text]:placeholder {
   overflow: hidden;
   max-height: 400px; /* Adjust the value as needed */
 }
+
+
 
 
 

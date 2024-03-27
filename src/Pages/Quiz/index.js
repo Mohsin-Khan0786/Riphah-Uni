@@ -4,6 +4,7 @@ import Footer from "../../Components/Footer";
 import "./Quiz.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { configapp } from "../../firebase";
+import { colors } from "@mui/material";
 
 const Quiz = () => {
   const [questionsData, setQuestionsData] = useState([]);
@@ -152,9 +153,11 @@ const Quiz = () => {
     <>
       <div className="container bg-light">
         
-        <div className="text-center mt-3">
-          <h4>Time Remaining: {formatTime(timeRemaining)}</h4>
-        </div>
+      <div className="text-center mt-3 bg-primary px-3 py-3" style={{ position: 'fixed', top: '20px', left: '50%', transform: 'translateX(-50%)', zIndex: '1000' ,borderRadius :'50px', animation: 'blinking 1s infinite' }}>
+  <h4 className="text-light">Remaining: {formatTime(timeRemaining)}</h4>
+</div>
+
+
 
         <div className="container mb-5 bg-light ">
           <div className="row">

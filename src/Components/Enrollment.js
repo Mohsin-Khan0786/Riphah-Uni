@@ -38,30 +38,34 @@ setShowQuiz(true);
               <div className="d-flex">
                 <h3 className="text-start mx-4">{topicD?.topic}</h3>
               </div>
-              <p className="mx-md-5 text-start">{topicD?.description}</p>
+              <p className="mx-md-5 text-start">{topicD?.description.slice(0, 30)}</p>
+
             </div>
           </div>
-          <div className="video-container mt-5 mb-5">
-            <ReactPlayer
-              url={topicD?.youtubeLink}
-              controls
-              config={{
-                youtube: {
-                  playerVars: {
-                    controls: 0,
-                    modestbranding: 1,
-                    rel: 0,
-                    showinfo: 0,
-                    fs: 0,
-                    disablekb: 1,
-                  },
-                  // events: {
-                  //   onReady: onPlayerReady,
-                  // },
-                },
-              }}
-            />
-          </div>
+          <div className="video-container mt-5 mb-5 d-flex justify-content-center align-items-center">
+  <ReactPlayer
+    url={topicD?.youtubeLink}
+    controls
+    width="100%"
+    height="100%"
+    config={{
+      youtube: {
+        playerVars: {
+          controls: 0,
+          modestbranding: 1,
+          rel: 0,
+          showinfo: 0,
+          fs: 0,
+          disablekb: 1,
+        },
+        // events: {
+        //   onReady: onPlayerReady,
+        // },
+      },
+    }}
+  />
+</div>
+
 
           <div className="col-12 col-md-8 mx-auto">
             <div className="row">

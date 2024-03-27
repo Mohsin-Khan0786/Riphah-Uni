@@ -187,7 +187,7 @@ const Topics = () => {
         }}
       >
         {showList && (
-          <List sx={{ width: "100%", maxWidth: 700 }}>
+          <List sx={{ width: "100%", maxWidth: 800 }}>
             {topicDataAll &&
               topicDataAll.map(
                 (
@@ -212,7 +212,7 @@ const Topics = () => {
                           {topic?.topic}
                         </span>
                       }
-                      secondary={truncateDescription(topic?.description)}
+                      secondary={truncateDescription(topic?.description.slice(1,35)) }
                       sx={{ fontSize: "14px", marginRight: "50px" }}
                     />
                     {!showTopic && (
