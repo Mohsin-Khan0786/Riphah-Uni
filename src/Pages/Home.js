@@ -101,7 +101,7 @@ const Home = () => {
                   src="hb-logo.jpg"
                   alt="Brand 1"
                   className="img-fluid"
-                  style={{ height: "180px" }}
+                  style={{ height: "180px",width:"100%" }}
                 />
               </div>
               <div className="col-6 col-sm-4 col-md-3 col-lg-2">
@@ -150,7 +150,7 @@ const Home = () => {
         <div className="row h-32rem">
           <div className="col-12 h-12rem mt-8">
             <div className="text-4xl font-semibold text-center p-4">
-              <h3>Invest in your career with Innovation.TECH</h3>
+              <h3>Invest in your career with INNOVATION.TECH</h3>
             </div>
             <div className="text-base text-center mt-1 mb-3">
               <p>
@@ -213,7 +213,7 @@ const Home = () => {
 
       <div className="container-fluid  bg-light">
         <div className="pt-5 pb-5">
-          <h1>See what you can learn with Innovation.TECH</h1>
+          <h1>See what you can learn with INNOVATION.TECH</h1>
         </div>
         <div>
           <div className="container ">
@@ -363,7 +363,7 @@ const Home = () => {
               >
                 <i className="lni-emoji-sad" />
                 <p className="mb-0 px-2">Can't find your answers?</p>
-                <a href="#"> Contact us</a>
+                <Link to="/Contact"> Contact us</Link>
               </div>
             </div>
           </div>
