@@ -91,28 +91,23 @@
   }
 }
 
-
 .video-container-home-page {
   position: relative;
-  width: 70%ing;
+  width: 70%;
   height: 500px!important;
   padding-top: 10px; /* Aspect ratio 16:9 */
   margin: 0 auto; /* Center the container horizontally */
 }
-
 .player-wrapper {
   position: relative;
   padding-top: 0px; /* Aspect ratio 16:9 */
 }
-
 .react-player {
   position: absolute;
   top: 0;
   left: 0;
   
 }
-
-
 
 
 /* ---------------------------------- */

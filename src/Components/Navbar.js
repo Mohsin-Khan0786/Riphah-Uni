@@ -19,22 +19,22 @@ const handleDashboardClick = () => {
 };
   return (
     <div>
-        <nav className="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+       <nav className="navbar navbar-expand-lg navbar-light bg-body-tertiary">
   <div className="container-fluid">
     <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon" />
-          </button>
+      className="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span className="navbar-toggler-icon" />
+    </button>
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-      <a className="navbar-brand  mt-lg-0 px-3" href="/">
-        <img src="LOGO.png" height={165} width={185} alt="Riphah Logo" loading="lazy" />
+      <a className="navbar-brand mt-lg-0 px-3" href="/">
+        <img src="LOGO.png" height={105} width={185} alt="Riphah Logo" loading="lazy" />
       </a>
       {/* Sidebar for mobile view */}
       <div className="sidebar">
@@ -67,7 +67,7 @@ const handleDashboardClick = () => {
         </ul>
       </div>
     </div>
-    <div className="d-flex align-items-center">
+    <div className="d-flex align-items-center ms-auto"> {/* ms-auto class to move the content to the right */}
       {userData ? (
         <div>
           <span className="mx-3">Welcome, {userData.name}</span>
@@ -85,6 +85,7 @@ const handleDashboardClick = () => {
     </div>
   </div>
 </nav>
+
 
 </div>
 
