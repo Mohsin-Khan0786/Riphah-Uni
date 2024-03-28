@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { configapp } from "../../firebase";
 import Enrollment from "../../Components/Enrollment";
 import { useNavigate } from "react-router-dom";
+import { Stack } from '@mui/material';
+
+import "./Topics.css";
 import {
   List,
   ListItem,
@@ -57,7 +60,7 @@ const Topics = () => {
               const answersArray = [];
               for (let i = 0; i < topics.length; i++) {
                 answersArray.push(
-                  userData[`topic${i + 1}_correct_answers`] || "Not-Submitted"
+                  userData[`topic${i + 1}_correct_answers`] || "N.A"
                 );
               }
               setCorrectAnswers(answersArray);
@@ -194,6 +197,7 @@ const Topics = () => {
                   topic,
                   index // Check if topicDataAll is not null or undefined
                 ) => (
+                
                   <ListItem
                     key={index}
                     alignItems="flex-start"
@@ -212,32 +216,48 @@ const Topics = () => {
                           {topic?.topic}
                         </span>
                       }
-                      secondary={truncateDescription(topic?.description.slice(1,35)) }
+                      secondary={
+                        <span className="hide-on-mobile">
+                          {truncateDescription(topic?.description.slice(1, 35))}
+                        </span>
+                      }
                       sx={{ fontSize: "14px", marginRight: "50px" }}
                     />
-                    {!showTopic && (
+                  
+                    <Stack direction="column">
+                      {!showTopic && (
+                        <Button
+                          variant="contained"
+                          onClick={() => handleShowData(index)}
+                          style={{
+                            marginLeft: "25px",
+                            padding: "5px 5px"}}
+                        >
+                          Show
+                        </Button>
+                      )}
+                  
+                      {/* Result Button */}
                       <Button
-                        variant="contained"
-                        onClick={() => handleShowData(index)}
+                        style={{
+                          marginLeft: "25px",
+                          padding: "5px 5px",
+                          backgroundColor: "darkGray",
+                          color : "white",
+                          marginTop: "10px" // Adjust the spacing between the buttons
+                        }}
                       >
-                        Show
+                        {` Result: ${
+                          correctAnswers[index]
+                            ? correctAnswers[index]
+                            : "N.A"
+                        }/12 `}
                       </Button>
-                    )}
-                    <Button
-                      style={{
-                        marginLeft: "25px",
-                        padding: "5px 5px",
-                      }}
-                      
-                    >
-                      {/* {correctAnswers[index]
-                        ? `${correctAnswers[index]}`
-                        : "Not-Submitted"} */}
-
-{`Result: ${correctAnswers[index] ? correctAnswers[index] : "Not-Submitted"} out of 12`}
-
-                    </Button>
+                    </Stack>
                   </ListItem>
+                  
+                
+                
                 )
               )}
           </List>

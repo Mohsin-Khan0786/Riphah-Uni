@@ -211,6 +211,7 @@ const Home = () => {
         </div>
        
       </div>
+      
 
       <div className="pb-5">
     <div className="video-container-home-page">
@@ -223,6 +224,8 @@ const Home = () => {
           controls={true}
         />
       </div>
+    
+
     {/* </div> */}
     </div> 
 

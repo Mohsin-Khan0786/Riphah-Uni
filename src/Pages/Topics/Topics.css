@@ -4,3 +4,9 @@
   /* body{
     background: #fff;
   } */
+
+  .hide-on-mobile {
+    @media (max-width: 600px) {
+      display: none;
+    }
+  }

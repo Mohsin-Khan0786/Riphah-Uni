@@ -104,14 +104,22 @@ const Login = () => {
     <div className="wrapper fadeInDown">
       <div id="formContent">
         <div className="fadeIn first">
-          <img
-            src="invoseg-logo.png"
-            id="icon"
-            alt="User Icon"
-            width={100}
-            height={180}
-            className="px-4"
-          />
+        <img
+  src="invoseg-logo.png"
+  id="icon"
+  alt="User Icon"
+  width={100}
+  height={180}
+  className="px-4 img-fluid" // Added "img-fluid" class for responsiveness
+  style={{
+    maxWidth: "100%", // Ensure the image is responsive
+    width: "auto",    // Ensure the image adjusts its width automatically
+    height: "auto",   // Ensure the image adjusts its height automatically
+    maxHeight: "180px",  // Set maximum height for medium and large screens
+    // maxWidth: "100px",   // Set maximum width for medium and large screens
+  }}
+/>
+
           <h3>INVOSEG</h3>
         </div>
         <form onSubmit={handleSubmit}>
@@ -179,17 +187,8 @@ const Login = () => {
               value={resetEmail}
               onChange={(e) => setResetEmail(e.target.value)}
             />
-            <button
-              type="submit"
-              style={{ backgroundColor: "skyblue", padding: "4px" }}
-            >
-              Reset Password
-            </button>
-            <button
-              type="button"
-              style={{ marginLeft: "10px", border: "none" }}
-              onClick={handleCloseResetPassword}
-            >
+            <button type="submit" style={{backgroundColor:"skyblue" , paddingLeft:"4px" , paddingRight:"4px",  paddingtop:"4px"}}>Reset Password</button>
+            <button type="button" style={{marginLeft:"10px", border:"none"}} onClick={handleCloseResetPassword}>
               Cancel
             </button>
           </form>

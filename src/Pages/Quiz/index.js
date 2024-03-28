@@ -162,9 +162,9 @@ const Quiz = () => {
         <div className="container mb-5 bg-light ">
           <div className="row">
             {questionsData.map((question, questionIndex) => (
-              <div key={questionIndex} className="col-7 mt-5 mb-5">
+              <div key={questionIndex} className="col-7  mb-5">
                 <p className="fw-bold">{question.question}</p>
-                <div>
+                <div className="text-start">
                   {question.options.map((option, optionIndex) => (
                     <label
                       key={optionIndex}
