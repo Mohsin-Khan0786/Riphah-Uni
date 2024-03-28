@@ -45,24 +45,10 @@ setShowQuiz(true);
           <div className="video-container mt-5 mb-5 d-flex justify-content-center align-items-center">
   <ReactPlayer
     url={topicD?.youtubeLink}
-    controls
+    controls= {false}
     width="100%"
     height="100%"
-    config={{
-      youtube: {
-        playerVars: {
-          controls: 0,
-          modestbranding: 1,
-          rel: 0,
-          showinfo: 0,
-          fs: 0,
-          disablekb: 1,
-        },
-        // events: {
-        //   onReady: onPlayerReady,
-        // },
-      },
-    }}
+    
   />
 </div>
 
