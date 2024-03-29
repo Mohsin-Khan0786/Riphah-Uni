@@ -14,7 +14,7 @@ const Login = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
-  const [openResetPassword, setOpenResetPassword] = useState(false); // State for managing the visibility of the reset password section
+  const [openResetPassword, setOpenResetPassword] = useState(false); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -53,14 +53,21 @@ const Login = () => {
      userDataRef.onSnapshot((doc) => {
        const userData = doc.data();
        if (userData) {
-         localStorage.setItem("userData", JSON.stringify(userData));
-         console.log("User data:", userData);
+         if (userData.status === "Block") {
+           // If user status is "Block", show error and don't allow login
+           toast.error(
+             "Your account has been blocked. Please contact support."
+           );
+         } else {
+           // If user status is not "Block", proceed with login
+           localStorage.setItem("userData", JSON.stringify(userData));
+           console.log("User data:", userData);
+           navigate("/dashboard");
+         }
        } else {
          console.error("User data not found");
        }
      });
-
-     navigate("/dashboard");
    } catch (error) {
      console.error("Login error:", error.message);
      if (
@@ -75,6 +82,7 @@ const Login = () => {
      }
    }
  };
+
 
 
 

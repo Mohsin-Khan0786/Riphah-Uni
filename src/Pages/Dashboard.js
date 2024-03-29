@@ -48,11 +48,24 @@ const Dashboard = () => {
       // Using onSnapshot to listen for changes
       userRef.onSnapshot((querySnapshot) => {
           querySnapshot.forEach((doc) => {
-              doc.ref.update({ showCourse: false, [courseName]: true }).then(() => {
-  
-                  const updatedUserData = { ...userData, showCourse: false, [courseName]: true };
-                  localStorage.setItem("userData", JSON.stringify(updatedUserData));
-              });
+              doc.ref
+                .update({
+                  showCourse: false,
+                  [courseName]: true,
+                  courseName: courseName,
+                })
+                .then(() => {
+                  const updatedUserData = {
+                    ...userData,
+                    showCourse: false,
+                    [courseName]: true,
+                    courseName: courseName,
+                  };
+                  localStorage.setItem(
+                    "userData",
+                    JSON.stringify(updatedUserData)
+                  );
+                });
           });
       });
   
