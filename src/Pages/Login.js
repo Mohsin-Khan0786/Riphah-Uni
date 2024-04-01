@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { auth, configapp } from "../firebase";
 import { useNavigate } from "react-router-dom";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
@@ -13,7 +14,7 @@ const Login = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
-  const [openResetPassword, setOpenResetPassword] = useState(false); // State for managing the visibility of the reset password section
+  const [openResetPassword, setOpenResetPassword] = useState(false); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,36 +25,66 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const { email, password } = loginData;
+ const handleSubmit = async (e) => {
+   e.preventDefault();
 
-      const userCredential = await configapp
-        .auth()
-        .signInWithEmailAndPassword(email, password);
-      console.log("Login successful");
+   const { email, password } = loginData;
 
-      const user = userCredential.user;
-      const db = configapp.firestore();
-      const userDataRef = db.collection("users").doc(user.uid);
+   if (!email) {
+     toast.error("Please enter your email");
+     return;
+   }
 
-      // Using onSnapshot to listen for changes
-      userDataRef.onSnapshot((doc) => {
-        const userData = doc.data();
-        if (userData) {
-          localStorage.setItem("userData", JSON.stringify(userData));
-          console.log("User data:", userData);
-        } else {
-          console.error("User data not found");
-        }
-      });
+   if (!password) {
+     toast.error("Please enter your password");
+     return;
+   }
 
-      navigate("/dashboard");
-    } catch (error) {
-      console.error("Login error:", error.message);
-    }
-  };
+   try {
+     const userCredential = await configapp
+       .auth()
+       .signInWithEmailAndPassword(email, password);
+     console.log("Login successful");
+
+     const user = userCredential.user;
+     const db = configapp.firestore();
+     const userDataRef = db.collection("users").doc(user.uid);
+
+     userDataRef.onSnapshot((doc) => {
+       const userData = doc.data();
+       if (userData) {
+         if (userData.status === "Block") {
+           // If user status is "Block", show error and don't allow login
+           toast.error(
+             "Your account has been blocked. Please contact support."
+           );
+         } else {
+           // If user status is not "Block", proceed with login
+           localStorage.setItem("userData", JSON.stringify(userData));
+           console.log("User data:", userData);
+           navigate("/dashboard");
+         }
+       } else {
+         console.error("User data not found");
+       }
+     });
+   } catch (error) {
+     console.error("Login error:", error.message);
+     if (
+       error.code === "auth/invalid-email" ||
+       error.code === "auth/user-not-found"
+     ) {
+       toast.error("Wrong email");
+     } else if (error.code === "auth/wrong-password") {
+       toast.error("Wrong password");
+     } else {
+       toast.error("Invalid Email/Password");
+     }
+   }
+ };
+
+
+
 
   const handleForgotPassword = () => {
     setOpenResetPassword(true); // Open the reset password section/modal
@@ -143,14 +174,15 @@ const Login = () => {
           </div>
           <input type="submit" className="fadeIn fourth" value="Sign In" />
           {/* Forgot Password button */}
-          <button
+          {/* <button
             type="button"
             onClick={handleForgotPassword}
             className="forgot-password-link"
             style={{border:"none"}}
           >
             Forgot Password?
-          </button>
+          </button> */}
+          <ToastContainer />
         </form>
       </div>
       {/* Forgot Password section/modal */}
