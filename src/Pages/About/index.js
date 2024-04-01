@@ -50,7 +50,7 @@ const index = () => {
                 </div>
                 <figure className="image-1">
                   <a href="#" className="lightbox-image" data-fancybox="images">
-                    <img title="Rahul Kumar Yadav" src="invoseg-logo.png" alt />
+                    <img title="Innovation-tech" src="invoseg-logo.png" alt />
                   </a>
                 </figure>
               </div>

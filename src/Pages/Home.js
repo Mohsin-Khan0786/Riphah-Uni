@@ -1,5 +1,5 @@
 import React from "react";
-import img1 from "../Assets/homeimg1.png";
+// import img1 from "../Assets/homeimg1.png";
 import { Link } from "react-router-dom";
 import ReactPlayer from "react-player";
 // import ReactPlayer from 'react-player'
@@ -51,6 +51,7 @@ const Home = () => {
 
   return (
     <>
+    
       <div className="container-fluid px-3 px-md-5 py-5 home-main">
         <div className="row flex-column-reverse flex-lg-row align-items-center g-5 py-5 home-main-row">
           <div className="col-lg-6 px-3 px-lg-5">

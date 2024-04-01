@@ -130,6 +130,7 @@ const Topics = () => {
       fetchTopics();
     }
 
+
     return () => {
       // Cleanup logic
     };
@@ -162,110 +163,133 @@ const Topics = () => {
     return description;
   };
 
+  useEffect(() => {
+    // Load Botpress web chat scripts
+    const loadBotpressWebChat = async () => {
+      const script1 = document.createElement('script');
+      script1.src = 'https://cdn.botpress.cloud/webchat/v1/inject.js';
+      script1.async = true;
+
+      const script2 = document.createElement('script');
+      script2.src = 'https://mediafiles.botpress.cloud/419fdd21-c826-4d83-beba-4092ce65a1c0/webchat/config.js';
+      script2.async = true;
+      script2.defer = true;
+
+      document.body.appendChild(script1);
+      document.body.appendChild(script2);
+    };
+
+    if (localStorage.getItem("userData")) {
+      loadBotpressWebChat();
+    }
+
+    return () => {
+      // Cleanup logic if necessary
+    };
+  }, []);
+
   return (
-    <div>
-      {/* Progress bar */}
-      {userIndex !== null && alllTopics > 0 && (
-        <div>
-          <LinearProgress
-            variant="determinate"
-            value={(userIndex / alllTopics) * 100}
-            sx={{ height: 4 }}
-          />
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            sx={{ textAlign: "center", mt: 1 }}
-          >
-            {((userIndex / alllTopics) * 100).toFixed(2)}%
-          </Typography>
-        </div>
-      )}
-      <div
-        className="container"
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          position: "relative",
-        }}
-      >
-        {showList && (
-          <List sx={{ width: "100%", maxWidth: 800 }}>
-            {topicDataAll &&
-              topicDataAll.map(
-                (
-                  topic,
-                  index // Check if topicDataAll is not null or undefined
-                ) => (
-                
-                  <ListItem
-                    key={index}
-                    alignItems="flex-start"
-                    sx={{ marginBottom: "20px" }}
-                  >
-                    <ListItemAvatar>
-                      <Avatar
-                        alt={topic.title}
-                        src={topic.avatar}
-                        sx={{ width: 55, height: 55, marginRight: 4 }}
+    <>
+      <div>
+        {/* Progress bar */}
+        {userIndex !== null && alllTopics > 0 && (
+          <div>
+            <LinearProgress
+              variant="determinate"
+              value={(userIndex / alllTopics) * 100}
+              sx={{ height: 4 }}
+            />
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{ textAlign: "center", mt: 1 }}
+            >
+              {((userIndex / alllTopics) * 100).toFixed(2)}%
+            </Typography>
+          </div>
+        )}
+        <div
+          className="container"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            position: "relative",
+          }}
+        >
+          {showList && (
+            <List sx={{ width: "100%", maxWidth: 800 }}>
+              {topicDataAll &&
+                topicDataAll.map(
+                  (
+                    topic,
+                    index // Check if topicDataAll is not null or undefined
+                  ) => (
+                    <ListItem
+                      key={index}
+                      alignItems="flex-start"
+                      sx={{ marginBottom: "20px" }}
+                    >
+                      <ListItemAvatar>
+                        <Avatar
+                          alt={topic.title}
+                          src={topic.avatar}
+                          sx={{ width: 55, height: 55, marginRight: 4 }}
+                        />
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={
+                          <span style={{ fontWeight: "bold", fontSize: "16px" }}>
+                            {topic?.topic}
+                          </span>
+                        }
+                        secondary={
+                          <span className="hide-on-mobile">
+                            {truncateDescription(topic?.description.slice(1, 35))}
+                          </span>
+                        }
+                        sx={{ fontSize: "14px", marginRight: "50px" }}
                       />
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={
-                        <span style={{ fontWeight: "bold", fontSize: "16px" }}>
-                          {topic?.topic}
-                        </span>
-                      }
-                      secondary={
-                        <span className="hide-on-mobile">
-                          {truncateDescription(topic?.description.slice(1, 35))}
-                        </span>
-                      }
-                      sx={{ fontSize: "14px", marginRight: "50px" }}
-                    />
-                  
-                    <Stack direction="column">
-                      {!showTopic && (
+                    
+                      <Stack direction="column">
+                        {!showTopic && (
+                          <Button
+                            variant="contained"
+                            onClick={() => handleShowData(index)}
+                            style={{
+                              marginLeft: "25px",
+                              padding: "5px 5px"}}
+                          >
+                            Show
+                          </Button>
+                        )}
+                      
+                        {/* Result Button */}
                         <Button
-                          variant="contained"
-                          onClick={() => handleShowData(index)}
                           style={{
                             marginLeft: "25px",
-                            padding: "5px 5px"}}
+                            padding: "5px 5px",
+                            backgroundColor: "darkGray",
+                            color : "white",
+                            marginTop: "10px" // Adjust the spacing between the buttons
+                          }}
                         >
-                          Show
+                          {` Result: ${
+                            correctAnswers[index]
+                              ? correctAnswers[index]
+                              : "N.A"
+                          }/12 `}
                         </Button>
-                      )}
-                  
-                      {/* Result Button */}
-                      <Button
-                        style={{
-                          marginLeft: "25px",
-                          padding: "5px 5px",
-                          backgroundColor: "darkGray",
-                          color : "white",
-                          marginTop: "10px" // Adjust the spacing between the buttons
-                        }}
-                      >
-                        {` Result: ${
-                          correctAnswers[index]
-                            ? correctAnswers[index]
-                            : "N.A"
-                        }/12 `}
-                      </Button>
-                    </Stack>
-                  </ListItem>
-                  
-                
-                
-                )
-              )}
-          </List>
-        )}
+                      </Stack>
+                    </ListItem>
+                  )
+                )}
+            </List>
+          )}
 
-        {showTopic && <Enrollment topicD={topicData} handleOff={handleOff} />}
-      </div>
-    </div>
+          {showTopic && <Enrollment topicD={topicData} handleOff={handleOff} />}
+        </div>
+      </div> 
+    </>
   );
 };
 
