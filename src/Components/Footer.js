@@ -106,13 +106,9 @@ const Footer = () => {
                   <i className="fas fa-print me-3" /> +92-300-8879084
                 </p>
               </div>
-              {/* Grid column */}
             </div>
-            {/* Grid row */}
           </div>
         </section>
-        {/* Section: Links  */}
-        {/* Copyright */}
         <div
           className="text-center p-4"
           style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}
