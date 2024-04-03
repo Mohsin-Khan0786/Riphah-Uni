@@ -1,15 +1,17 @@
 import React from "react";
 import "./AboutUs.css";
 
+
 const index = () => {
+
   return (
     <div>
       <section className="about-section">
         <div className="container">
           <div className="row">
-            <div className="content-column col-lg-6 col-md-12 col-sm-12 order-2">
+            <div className="content-column col-lg-6 col-md-12 col-sm-12 order-2 "data-aos="fade-left"  data-aos-delay="500" data-aos-duration="1000">
               <div className="inner-column">
-                <div className="sec-title pt-sm-8">
+                <div className="sec-title pt-sm-8"  >
                   <h2>We are Creative Tech Enthusiast working since 2015</h2>
                 </div>
                 <div className="text">
@@ -42,7 +44,7 @@ const index = () => {
               </div>
             </div>
             {/* Image Column */}
-            <div className="image-column col-lg-6 col-md-12 col-sm-12">
+            <div className="image-column col-lg-6 col-md-12 col-sm-12" >
               <div className="inner-column wow fadeInLeft">
                 <div className="author-desc">
                   <h2>Daniyal Humayun</h2>

@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import img1 from "../Assets/homeimg1.png";
 import { Link } from "react-router-dom";
 import ReactPlayer from "react-player";
 // import ReactPlayer from 'react-player'
 
+
 const Home = () => {
+  
   const faqData = [
     {
       question: "What does INNOVATION.TECH offer?",
@@ -48,9 +50,11 @@ const Home = () => {
         "We keep learning! We go to meetings, classes, and look online to see what's new. We talk with others who do the same job to learn from them too.",
     },
   ];
-
+  
+  
   return (
     <>
+    
     
       <div className="container-fluid px-3 px-md-5 py-5 home-main">
         <div className="row flex-column-reverse flex-lg-row align-items-center g-5 py-5 home-main-row">
@@ -98,8 +102,8 @@ const Home = () => {
             Learn from INNVOATION.TECH and INVOSEG AI Software Engineers
           </h4>
       
-          <div className="row justify-content-center home-logos-part">
-  <div className="col-12 col-md-6 col-lg-2 mb-3">
+          <div className="row justify-content-center home-logos-part"  >
+  <div className="col-12 col-md-6 col-lg-2 mb-3" data-aos="fade-up"  data-aos-delay="500" data-aos-duration="1000">
     <img
       src="hb-logo.jpg"
       alt="Brand 1"
@@ -107,7 +111,7 @@ const Home = () => {
       style={{ height: "180px", width: "180px" }}
     />
   </div>
-  <div className="col-12 col-md-6 col-lg-2  mb-3 ">
+  <div className="col-12 col-md-6 col-lg-2  mb-3 " data-aos="fade-up"  data-aos-delay="500" data-aos-duration="1000">
     <img
       src="Al-nafoorah.jpeg"
       alt="Brand 2"
@@ -115,7 +119,7 @@ const Home = () => {
       style={{ height: "180px" ,width: "180px" }}
     />
   </div>
-  <div className="col-12 col-md-6 col-lg-2  mb-3">
+  <div className="col-12 col-md-6 col-lg-2  mb-3"data-aos="fade-up"  data-aos-delay="500" data-aos-duration="1000">
     <img
       src="Toni-GUY.png"
       alt="Brand 3"
@@ -123,7 +127,7 @@ const Home = () => {
       style={{ height: "180px" ,width: "180px" }}
     />
   </div>
-  <div className="col-12 col-md-6 col-lg-2  mb-3">
+  <div className="col-12 col-md-6 col-lg-2  mb-3" data-aos="fade-up"  data-aos-delay="500" data-aos-duration="1000">
     <img
       src="indigo.jpg"
       alt="Brand 4"
@@ -131,7 +135,7 @@ const Home = () => {
       style={{ height: "180px" ,width: "180px" }}
     />
   </div>
-  <div className="col-12 col-md-6 col-lg-2  mb-3">
+  <div className="col-12 col-md-6 col-lg-2  mb-3" data-aos="fade-up"  data-aos-delay="500" data-aos-duration="1000">
     <img
       src="the-sky.jpg"
       alt="Brand 5"
@@ -139,7 +143,7 @@ const Home = () => {
       style={{ height: "180px" ,width: "180px" }}
     />
   </div>
-  <div className="col-12 col-md-6 col-lg-2  mb-3">
+  <div className="col-12 col-md-6 col-lg-2  mb-3" data-aos="fade-up"  data-aos-delay="500" data-aos-duration="1000">
     <img
       src="lamasa.jpeg"
       alt="Brand 6"
@@ -166,7 +170,7 @@ const Home = () => {
             </div>
             <div class="container mt-4">
               <div class="row justify-content-center align-items-center  mb-5 px-5">
-                <div class="col-lg-3 col-md-4 col-sm-6 h-100 px-5 mt-3">
+                <div class="col-lg-3 col-md-4 col-sm-6 h-100 px-5 mt-3"  data-aos="flip-left"  data-aos-delay="500" data-aos-duration="1000">
                   <div class="d-flex justify-content-center">
                     <img src="icon.png" alt="Icon 1" class="img-fluid" />
                   </div>
@@ -176,7 +180,7 @@ const Home = () => {
                     and advance your skills
                   </div>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 h-100 px-5 mt-3">
+                <div class="col-lg-3 col-md-4 col-sm-6 h-100 px-5 mt-3" data-aos="flip-left"  data-aos-delay="500" data-aos-duration="1000">
                   <div class="d-flex justify-content-center">
                     <img src="icon2.png" alt="Icon 2" class="img-fluid" />
                   </div>
@@ -186,7 +190,7 @@ const Home = () => {
                     multiple courses this year
                   </div>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 h-100 px-5 mt-3">
+                <div class="col-lg-3 col-md-4 col-sm-6 h-100 px-5 mt-3" data-aos="flip-left"  data-aos-delay="500" data-aos-duration="1000">
                   <div class="d-flex justify-content-center">
                     <img src="icon3.png" alt="Icon 3" class="img-fluid" />
                   </div>
@@ -196,7 +200,7 @@ const Home = () => {
                     switch to a different course
                   </div>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 h-100 px-5  mt-3">
+                <div class="col-lg-3 col-md-4 col-sm-6 h-100 px-5  mt-3" data-aos="flip-left"  data-aos-delay="500" data-aos-duration="1000">
                   <div class="d-flex justify-content-center">
                     <img src="icon4.png" alt="Icon 4" class="img-fluid" />
                   </div>
@@ -215,7 +219,7 @@ const Home = () => {
       
 
       <div className="pb-5">
-    <div className="video-container-home-page">
+    <div className="video-container-home-page" data-aos="flip-left"  data-aos-delay="500" data-aos-duration="1000">
       {/* <div className="player-wrapper"> */}
         <ReactPlayer
           className="react-player"
@@ -241,7 +245,7 @@ const Home = () => {
           <div className="container ">
             <div className="row row-cols-1 row-cCoursera Plusols-md-2 row-cols-lg-4 mx-3 pb-5">
               <div className="col">
-                <div class="card mb-3">
+                <div class="card mb-3" data-aos="flip-left"  data-aos-delay="500" data-aos-duration="1000">
                   <img
                     src="web-devlopment-logo.jpg"
                     className="card-img-top"
@@ -258,7 +262,7 @@ const Home = () => {
                 </div>
               </div>
               <div className="col">
-                <div className="card mb-3">
+                <div className="card mb-3" data-aos="flip-left"  data-aos-delay="500" data-aos-duration="1000">
                   <img
                     src="app-development.png"
                     className="card-img-top"
@@ -274,7 +278,7 @@ const Home = () => {
                 </div>
               </div>
               <div className="col">
-                <div className="card mb-3">
+                <div className="card mb-3" data-aos="flip-left"  data-aos-delay="500" data-aos-duration="1000">
                   <img
                     src="social-media-marketing.jpg"
                     className="card-img-top"
@@ -290,7 +294,7 @@ const Home = () => {
                 </div>
               </div>
               <div className="col">
-                <div className="card mb-3">
+                <div className="card mb-3" data-aos="flip-left"  data-aos-delay="500" data-aos-duration="1000">
                   <img
                     src="Wordpress.jpeg"
                     className="card-img-top"

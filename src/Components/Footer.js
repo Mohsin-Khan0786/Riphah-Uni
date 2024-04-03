@@ -37,7 +37,7 @@ const Footer = () => {
         </section>
         {/* Section: Social media */}
         {/* Section: Links  */}
-        <section className>
+        <section className='d-none d-sm-block' >
           <div className="container text-center text-md-start mt-5">
             {/* Grid row */}
             <div className="row mt-3">
@@ -109,6 +109,10 @@ const Footer = () => {
             </div>
           </div>
         </section>
+        {/* Section: Links  */}
+
+
+        {/* Copyright */}
         <div
           className="text-center p-4"
           style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}

@@ -164,7 +164,6 @@ const Topics = () => {
   };
 
   useEffect(() => {
-    // Load Botpress web chat scripts
     const loadBotpressWebChat = async () => {
       const script1 = document.createElement('script');
       script1.src = 'https://cdn.botpress.cloud/webchat/v1/inject.js';
@@ -209,7 +208,7 @@ const Topics = () => {
           </div>
         )}
         <div
-          className="container"
+          className="container botpress-chat-container" // Apply CSS class for chatbot container
           style={{
             display: "flex",
             justifyContent: "center",
@@ -234,6 +233,8 @@ const Topics = () => {
                           alt={topic.title}
                           src={topic.avatar}
                           sx={{ width: 55, height: 55, marginRight: 4 }}
+
+
                         />
                       </ListItemAvatar>
                       <ListItemText
@@ -294,3 +295,5 @@ const Topics = () => {
 };
 
 export default Topics;
+
+

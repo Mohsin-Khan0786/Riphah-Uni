@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { auth, configapp } from "../firebase";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +16,11 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
   const [openResetPassword, setOpenResetPassword] = useState(false); 
+  const [loading, setLoading] = useState(false);
+
+  const toggleLoading = (status) => {
+    setLoading(status);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,16 +33,19 @@ const Login = () => {
 
  const handleSubmit = async (e) => {
    e.preventDefault();
+   toggleLoading(true); // Start loading
 
    const { email, password } = loginData;
 
    if (!email) {
      toast.error("Please enter your email");
+     toggleLoading(false); // Stop loading
      return;
    }
 
    if (!password) {
      toast.error("Please enter your password");
+     toggleLoading(false); // Stop loading
      return;
    }
 
@@ -54,12 +63,10 @@ const Login = () => {
        const userData = doc.data();
        if (userData) {
          if (userData.status === "Block") {
-           // If user status is "Block", show error and don't allow login
            toast.error(
              "Your account has been blocked. Please contact support."
            );
          } else {
-           // If user status is not "Block", proceed with login
            localStorage.setItem("userData", JSON.stringify(userData));
            console.log("User data:", userData);
            navigate("/dashboard");
@@ -80,18 +87,17 @@ const Login = () => {
      } else {
        toast.error("Invalid Email/Password");
      }
+   } finally {
+     toggleLoading(false); // Stop loading
    }
  };
 
-
-
-
   const handleForgotPassword = () => {
-    setOpenResetPassword(true); // Open the reset password section/modal
+    setOpenResetPassword(true);
   };
 
   const handleCloseResetPassword = () => {
-    setOpenResetPassword(false); // Close the reset password section/modal
+    setOpenResetPassword(false);
   };
 
   const handleResetPassword = async (e) => {
@@ -99,7 +105,7 @@ const Login = () => {
     try {
       await auth.sendPasswordResetEmail(resetEmail);
       console.log("Password reset email sent successfully");
-      handleCloseResetPassword(); // Close the reset password section/modal
+      handleCloseResetPassword();
       window.alert(
         "Password reset link has been sent to your email. Please check your inbox."
       );
@@ -112,22 +118,20 @@ const Login = () => {
     <div className="wrapper fadeInDown">
       <div id="formContent">
         <div className="fadeIn first">
-        <img
-  src="invoseg-logo.png"
-  id="icon"
-  alt="User Icon"
-  width={100}
-  height={180}
-  className="px-4 img-fluid" // Added "img-fluid" class for responsiveness
-  style={{
-    maxWidth: "100%", // Ensure the image is responsive
-    width: "auto",    // Ensure the image adjusts its width automatically
-    height: "auto",   // Ensure the image adjusts its height automatically
-    maxHeight: "180px",  // Set maximum height for medium and large screens
-    // maxWidth: "100px",   // Set maximum width for medium and large screens
-  }}
-/>
-
+          <img
+            src="invoseg-logo.png"
+            id="icon"
+            alt="User Icon"
+            width={100}
+            height={180}
+            className="px-4 img-fluid"
+            style={{
+              maxWidth: "100%",
+              width: "auto",
+              height: "auto",
+              maxHeight: "180px",
+            }}
+          />
           <h3>INVOSEG</h3>
         </div>
         <form onSubmit={handleSubmit}>
@@ -173,19 +177,18 @@ const Login = () => {
             </div>
           </div>
           <input type="submit" className="fadeIn fourth" value="Sign In" />
-          {/* Forgot Password button */}
-          {/* <button
-            type="button"
-            onClick={handleForgotPassword}
-            className="forgot-password-link"
-            style={{border:"none"}}
-          >
-            Forgot Password?
-          </button> */}
           <ToastContainer />
         </form>
       </div>
-      {/* Forgot Password section/modal */}
+      {loading && (
+        <div className="spinner-overlay">
+          <div className="spinner-container">
+            <div className="spinner-border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        </div>
+      )}
       {openResetPassword && (
         <div className="reset-password-section">
           <form onSubmit={handleResetPassword}>
