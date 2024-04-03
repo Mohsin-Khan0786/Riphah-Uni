@@ -12,6 +12,7 @@ import ProtectedRoute from './ProtectedRoute';
 import Contact from './Pages/Contact';
 import About from './Pages/About'
 import Footer from './Components/Footer';
+import Offline from './Pages/Offline';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="About" element={<About />} />
         <Route path="/Contact" element={<Contact />} />
+        <Route path="/Oflline" element={<Offline />} />
 
         <Route path="/DashBoard" element={<Dashboard />} />
         <Route
