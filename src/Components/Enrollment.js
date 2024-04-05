@@ -93,15 +93,18 @@ setShowQuiz(true);
                 </div>
               </div>
             </div>
-            <div className="col-md-2 d-flex align-items-center justify-content-end">
-              <Link
-                to="/Quiz"
-                className="px-4 py-2 btn btn-dark text- text-end justify-content-end"
-                onClick={handleQuizStart}
-              >
-                Quiz start
-              </Link>
-            </div>
+
+            {topicD?.quizCompleted === false && (
+              <div className="col-md-2 d-flex align-items-center justify-content-end">
+                <Link
+                  to="/Quiz"
+                  className="px-4 py-2 btn btn-dark text- text-end justify-content-end"
+                  onClick={handleQuizStart}
+                >
+                  Quiz start
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>

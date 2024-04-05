@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { configapp } from "../../firebase";
 import Enrollment from "../../Components/Enrollment";
 import { useNavigate } from "react-router-dom";
-import { Stack } from '@mui/material';
+import { Stack } from "@mui/material";
 
 import "./Topics.css";
 import {
@@ -130,7 +130,6 @@ const Topics = () => {
       fetchTopics();
     }
 
-
     return () => {
       // Cleanup logic
     };
@@ -163,29 +162,30 @@ const Topics = () => {
     return description;
   };
 
-  useEffect(() => {
-    const loadBotpressWebChat = async () => {
-      const script1 = document.createElement('script');
-      script1.src = 'https://cdn.botpress.cloud/webchat/v1/inject.js';
-      script1.async = true;
+  // useEffect(() => {
+  //   const loadBotpressWebChat = async () => {
+  //     const script1 = document.createElement("script");
+  //     script1.src = "https://cdn.botpress.cloud/webchat/v1/inject.js";
+  //     script1.async = true;
 
-      const script2 = document.createElement('script');
-      script2.src = 'https://mediafiles.botpress.cloud/419fdd21-c826-4d83-beba-4092ce65a1c0/webchat/config.js';
-      script2.async = true;
-      script2.defer = true;
+  //     const script2 = document.createElement("script");
+  //     script2.src =
+  //       "https://mediafiles.botpress.cloud/419fdd21-c826-4d83-beba-4092ce65a1c0/webchat/config.js";
+  //     script2.async = true;
+  //     script2.defer = true;
 
-      document.body.appendChild(script1);
-      document.body.appendChild(script2);
-    };
+  //     document.body.appendChild(script1);
+  //     document.body.appendChild(script2);
+  //   };
 
-    if (localStorage.getItem("userData")) {
-      loadBotpressWebChat();
-    }
+  //   if (localStorage.getItem("userData")) {
+  //     loadBotpressWebChat();
+  //   }
 
-    return () => {
-      // Cleanup logic if necessary
-    };
-  }, []);
+  //   return () => {
+  //     // Cleanup logic if necessary
+  //   };
+  // }, []);
 
   return (
     <>
@@ -233,24 +233,26 @@ const Topics = () => {
                           alt={topic.title}
                           src={topic.avatar}
                           sx={{ width: 55, height: 55, marginRight: 4 }}
-
-
                         />
                       </ListItemAvatar>
                       <ListItemText
                         primary={
-                          <span style={{ fontWeight: "bold", fontSize: "16px" }}>
+                          <span
+                            style={{ fontWeight: "bold", fontSize: "16px" }}
+                          >
                             {topic?.topic}
                           </span>
                         }
                         secondary={
                           <span className="hide-on-mobile">
-                            {truncateDescription(topic?.description.slice(1, 35))}
+                            {truncateDescription(
+                              topic?.description.slice(1, 35)
+                            )}
                           </span>
                         }
                         sx={{ fontSize: "14px", marginRight: "50px" }}
                       />
-                    
+
                       <Stack direction="column">
                         {!showTopic && (
                           <Button
@@ -258,20 +260,21 @@ const Topics = () => {
                             onClick={() => handleShowData(index)}
                             style={{
                               marginLeft: "25px",
-                              padding: "5px 5px"}}
+                              padding: "5px 5px",
+                            }}
                           >
                             Show
                           </Button>
                         )}
-                      
+
                         {/* Result Button */}
                         <Button
                           style={{
                             marginLeft: "25px",
                             padding: "5px 5px",
                             backgroundColor: "darkGray",
-                            color : "white",
-                            marginTop: "10px" // Adjust the spacing between the buttons
+                            color: "white",
+                            marginTop: "10px", // Adjust the spacing between the buttons
                           }}
                         >
                           {` Result: ${
@@ -289,11 +292,9 @@ const Topics = () => {
 
           {showTopic && <Enrollment topicD={topicData} handleOff={handleOff} />}
         </div>
-      </div> 
+      </div>
     </>
   );
 };
 
 export default Topics;
-
-
