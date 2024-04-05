@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 // import { Link } from "react-router-dom";
 import Footer from "../../Components/Footer";
 import "./Quiz.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useNavigation, useParams } from "react-router-dom";
 import { configapp } from "../../firebase";
 import { colors } from "@mui/material";
+import rootShouldForwardProp from "@mui/material/styles/rootShouldForwardProp";
 
 const Quiz = () => {
   const [questionsData, setQuestionsData] = useState([]);
@@ -108,7 +109,7 @@ const Quiz = () => {
  return () => clearInterval(timer);
  },[timeRemaining])
  
-
+const router = useNavigate()
  const checkPassing = async () => {
    try {
      const docRef = configapp.firestore().collection(collectionName).doc(id);
@@ -130,16 +131,22 @@ const Quiz = () => {
            console.log("Correct Answers:", correctAnswers);
            console.log("Total Questions:", fetchedQuestions.length);
 
-           const passingThreshold = 5; 
+           const passingThreshold = 6; 
 
            if (correctAnswers >= passingThreshold) {
              alert("Congratulations! You have passed the quiz.");
+             docRef.update({
+               quizCompleted: true,
+             });
              updateUserDocument(correctAnswers);
+             
            } else {
              alert("Sorry, you did not pass the quiz. Try again.");
              console.log("User Answers:", answers);
-             window.location.reload()
-           }
+             
+             router.push('/Topics')    
+
+            }
          }
        }
      });
