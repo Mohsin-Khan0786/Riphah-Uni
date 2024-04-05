@@ -162,30 +162,41 @@ const Topics = () => {
     return description;
   };
 
-  // useEffect(() => {
-  //   const loadBotpressWebChat = async () => {
-  //     const script1 = document.createElement("script");
-  //     script1.src = "https://cdn.botpress.cloud/webchat/v1/inject.js";
-  //     script1.async = true;
+  useEffect(() => {
+    const loadBotpressWebChat = async () => {
+      try {
+        const script1 = document.createElement("script");
+        script1.src = "https://cdn.botpress.cloud/webchat/v1/inject.js";
+        script1.async = true;
 
-  //     const script2 = document.createElement("script");
-  //     script2.src =
-  //       "https://mediafiles.botpress.cloud/419fdd21-c826-4d83-beba-4092ce65a1c0/webchat/config.js";
-  //     script2.async = true;
-  //     script2.defer = true;
+        const script2 = document.createElement("script");
+        script2.src = "https://mediafiles.botpress.cloud/419fdd21-c826-4d83-beba-4092ce65a1c0/webchat/config.js";
+        script2.async = true;
+        script2.defer = true;
 
-  //     document.body.appendChild(script1);
-  //     document.body.appendChild(script2);
-  //   };
+        script1.onerror = () => {
+          console.error("Failed to load script1");
+        };
 
-  //   if (localStorage.getItem("userData")) {
-  //     loadBotpressWebChat();
-  //   }
+        script2.onerror = () => {
+          console.error("Failed to load script2");
+        };
 
-  //   return () => {
-  //     // Cleanup logic if necessary
-  //   };
-  // }, []);
+        document.body.appendChild(script1);
+        document.body.appendChild(script2);
+      } catch (error) {
+        console.error("Error loading Botpress WebChat:", error);
+      }
+    };
+
+    if (localStorage.getItem("userData")) {
+      loadBotpressWebChat();
+    }
+
+    return () => {
+      // Cleanup logic if necessary
+    };
+  }, []);
 
   return (
     <>
