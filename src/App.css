@@ -115,9 +115,16 @@
 
 body{margin-top:0px;}
 .section_padding_130 {
-    padding-top: 130px;
-    padding-bottom: 130px;
+  padding-top: 130px;
+  padding-bottom: 130px;
 }
+
+@media (max-width: 768px) {
+  .section_padding_130 {
+      padding-bottom: 0;
+  }
+}
+
 .faq_area {
     position: relative;
     z-index: 1;

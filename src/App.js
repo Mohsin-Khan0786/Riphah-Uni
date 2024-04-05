@@ -12,19 +12,35 @@ import ProtectedRoute from './ProtectedRoute';
 import Contact from './Pages/Contact';
 import About from './Pages/About'
 import Footer from './Components/Footer';
+import { useEffect, useState } from 'react';
 import Offline from './Pages/Offline';
 
 
 function App() {
-  return (
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+  useEffect(() => {
+    // Update network status
+    const handleStatusChange = () => {
+      setIsOnline(navigator.onLine);
+    };
+
+    window.addEventListener("online", handleStatusChange);
+    window.addEventListener("offline", handleStatusChange);
+
+    return () => {
+      window.removeEventListener("online", handleStatusChange);
+      window.removeEventListener("offline", handleStatusChange);
+    };
+  }, []);
+
+  return isOnline ? (
     <div className="App">
       <Navbar />
-
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="About" element={<About />} />
+        <Route path="/About" element={<About />} />
         <Route path="/Contact" element={<Contact />} />
-        <Route path="/Oflline" element={<Offline />} />
 
         <Route path="/DashBoard" element={<Dashboard />} />
         <Route
@@ -52,14 +68,13 @@ function App() {
           }
         />
         <Route path="/Login" element={<Login />} />
-
         <Route path="/Sign-up" element={<SignUp />} />
       </Routes>
-
       <Footer />
     </div>
+  ) : (
+    <Offline/>
   );
 }
 
 export default App;
-

@@ -13,7 +13,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
 export default function TemporaryDrawer() {
-  const navigate = useNavigate(); // or useHistory() if using react-router-dom versions prior to 6
+  const navigate = useNavigate(); 
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen) => () => {
@@ -61,7 +61,7 @@ export default function TemporaryDrawer() {
       </List>
       <Divider />
       <List>
-        {['About Us', 'Contact Us', 'Spam'].map((text, index) => (
+        {['About Us', 'Contact Us'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton onClick={() => handleItemClick(text)}>
               <ListItemIcon>

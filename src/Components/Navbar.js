@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import TemporaryDrawer from './Drawer' // Import the TemporaryDrawer component
+import TemporaryDrawer from './Drawer'
 
 const Navbar = () => {
   const navigate = useNavigate()
@@ -23,17 +23,7 @@ const Navbar = () => {
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-body-tertiary">
         <div className="container-fluid">
-          {/* <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon" />
-          </button> */}
+         
           <div className="d-lg-none d-md-none">
         <TemporaryDrawer />
       </div>

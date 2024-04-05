@@ -106,9 +106,7 @@ const Footer = () => {
                   <i className="fas fa-print me-3" /> +92-300-8879084
                 </p>
               </div>
-              {/* Grid column */}
             </div>
-            {/* Grid row */}
           </div>
         </section>
         {/* Section: Links  */}
